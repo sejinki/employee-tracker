@@ -1,9 +1,9 @@
 use EMPLOYEE_TRACKER;
 
--- insert into DEPARTMENT(name) values
--- ('IT'),
--- ('Marketing'),
--- ('SALES');
+insert into DEPARTMENT(name) values
+('IT'),
+('Marketing'),
+('SALES');
 
 insert into roles(title,salaray,DEPARTMENT_ID) values
 ('Manager',23422,1),
