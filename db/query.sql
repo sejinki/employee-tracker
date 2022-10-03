@@ -20,7 +20,7 @@ on e.role_id = r.id left join department d
  on  e.MANAGER_ID = emp.id;
 
 
-
+update employee set role_id = 4 where id=7;
 
 
 

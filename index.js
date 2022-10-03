@@ -78,13 +78,7 @@ function displayDepartment() {
 
   function displayEmployees(){
     console.log("Employee Details")
-    db.query(`
-    select e.id,e.first_name,e.last_name,r.id,r.title,r.salaray,d.id,d.name,
-    emp.FIRST_NAME as "Manager First name", emp.last_name as "Manager Last name"
-    from employee e left join roles r
-    on e.role_id = r.id left join department d
-     on r.department_id = d.id left  join employee emp
-     on  e.MANAGER_ID = emp.id;`
+    db.query(`select * from employee;`
     ,function(err,data){
         if(err) throw err;
         console.table(data);
@@ -184,32 +178,30 @@ function displayDepartment() {
     })
   }
 
-//   function displayAddRoles(){
-//     inquirer.prompt([
+  function displayUpdateEmployeeRole(){
+    inquirer.prompt([
 
-//         {
-//             type:"input",
-//             name:"title",
-//             message:"title"
-//         },
-//         {
-//             type:"input",
-//             name:"salaray",
-//             message:"salaray"
-//         },
-//         {
-//             type:"input",
-//             name:"DEPARTMENT_ID",
-//             message:"DEPARTMENT_ID"
-//         }
-//     ]).then(response => {
-//         db.query(`insert into roles(title,salaray,DEPARTMENT_ID) values
-//         (?,?,?);`,[response.title,response.salaray, response.DEPARTMENT_ID],function(err,data){
-//             if(err) throw err;
-//             console.log(data)
-//             employeeTracker()
-//         })
-//     })
-//   }
+        {
+            type:"list",
+            name:"employee_id",
+            message:"enter employee_id",
+            choices:[1,2,3,4,5,6,7]
+        },
+        {
+            type:"list",
+            name:"role_id",
+            message:"enter role_id",
+            choices:[1,2,3,4]
+        }
+        
+    ]).then(response => {
+        db.query(`update employee set role_id =? where id=?;`
+       ,[response.role_id,response.employee_id],function(err,data){
+            if(err) throw err;
+            console.log(data)
+            employeeTracker()
+        })
+    })
+  }
 
   
